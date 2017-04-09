@@ -1,12 +1,11 @@
 'use strict';
 
-var path = require('path'),
-  webpack = require('webpack');
+var webpack = require('webpack');
 
 module.exports = {
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'assets')
+    publicPath: '/assets/'
   },
   cache: true,
   debug: true,
