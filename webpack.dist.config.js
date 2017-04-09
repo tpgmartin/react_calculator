@@ -6,28 +6,26 @@ var path = require('path'),
 module.exports = {
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'assets')
+    path: path.resolve(__dirname, 'dist')
   },
-  cache: true,
-  debug: true,
+  debug: false,
   devtool: false,
-  entry: [
-    'webpack/hot/only-dev-server',
-    './src/index.js'
-  ],
+  entry: './src/index.js',
   stats: {
     colors: true,
-    reasons: true
+    reasons: false
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin()
   ],
   module: {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      loader: 'react-hot!babel-loader'
+      loader: 'babel-loader'
     }, {
       test: /\.sass/,
       loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
